@@ -9,7 +9,7 @@ import java.util.Map;
 public class Lift {
     private Map<Floor, Direction> calls = new HashMap<>();
     private Floor currentFlor;
-    public boolean isStandingBy = true;
+    private boolean isStandingBy = true;
     private List<Floor> floorRequests = new LinkedList<>();
 
     public Lift(Floor floor) {
@@ -28,5 +28,9 @@ public class Lift {
     public void requestFloor(Floor floor) {
         floorRequests.add(floor);
         isStandingBy = false;
+    }
+
+    public boolean liftStatus() {
+        return isStandingBy;
     }
 }
