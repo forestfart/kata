@@ -1,7 +1,7 @@
 ### Kata Repository
 
-[![Build Status](https://travis-ci.org/forestfart/kata.svg?branch=master)](https://travis-ci.org/forestfart/kata)
-[![codecov](https://codecov.io/gh/forestfart/kata/branch/master/graph/badge.svg)](https://codecov.io/gh/forestfart/kata)
+[![Build Status](https://travis-ci.org/forestfart/oopKata.svg?branch=master)](https://travis-ci.org/forestfart/oopKata)
+[![codecov](https://codecov.io/gh/forestfart/oopKata/branch/master/graph/badge.svg)](https://codecov.io/gh/forestfart/oopKata)
 
 
 Repository set up to practise TDD and Object Calisthenics (rules listed below)
