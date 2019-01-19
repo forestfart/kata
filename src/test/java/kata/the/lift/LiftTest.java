@@ -17,7 +17,7 @@ public class LiftTest {
         lift.floorCall(new Floor(3), UP);
 
         // Then
-        assertThat(lift.status(), is(false));
+        assertThat(lift.isStandby(), is(false));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class LiftTest {
         lift.requestFloor(new Floor(5));
 
         // Then
-        assertThat(lift.status(), is(false));
+        assertThat(lift.isStandby(), is(false));
 
     }
 }
