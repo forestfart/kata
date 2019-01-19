@@ -2,6 +2,18 @@
 
 [![codecov](https://codecov.io/gh/forestfart/kata/branch/master/graph/badge.svg)](https://codecov.io/gh/forestfart/kata)
 
+Repository set up to practise TDD and Object Calisthenics (rules listed below)
+- Only One Level Of Indentation Per Method
+- Don’t Use The ELSE Keyword
+- Wrap All Primitives And Strings
+- First Class Collections
+- One Dot Per Line
+- Don’t Abbreviate
+- Keep All Entities Small
+- No Classes With More Than Two Instance Variables
+- No Getters/Setters/Properties
+
+
 ### 1. The Lift Kata
 
 Since lifts are everywhere and they contain software, how easy would it be to write a basic one? Let’s TDD a lift, starting with simple behaviors and working toward complex ones. Assume good input from calling code and concentrate on the main flow.
