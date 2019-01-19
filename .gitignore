@@ -1,9 +1,7 @@
 *.class
 *.iml
-*.jar
 *.bin
 *.lock
 *.idx
 *.MF
 .idea/
-.gradle/
