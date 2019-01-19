@@ -1,13 +1,16 @@
 package kata.the.lift;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 
 public class Lift {
     private Map<Floor, Direction> calls = new HashMap<>();
     private Floor currentFlor;
-    public boolean isStandingBy;
+    public boolean isStandingBy = true;
+    private List<Floor> floorRequests = new LinkedList<>();
 
     public Lift(Floor floor) {
         this.currentFlor = floor;
@@ -20,5 +23,10 @@ public class Lift {
 
     public Floor currentFloor() {
         return currentFlor;
+    }
+
+    public void requestFloor(Floor floor) {
+        floorRequests.add(floor);
+        isStandingBy = false;
     }
 }

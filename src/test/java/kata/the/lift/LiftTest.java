@@ -28,6 +28,18 @@ public class LiftTest {
 
         // Then
         assertThat(lift.currentFloor(), is(currentFloor));
+    }
+
+    @Test
+    public void liftGetsFloorRequest() {
+        // Given
+        Lift lift = new Lift(new Floor(2));
+
+        // When
+        lift.requestFloor(new Floor(5));
+
+        // Then
+        assertThat(lift.isStandingBy, is(false));
 
     }
 }
