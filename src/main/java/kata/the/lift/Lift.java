@@ -30,7 +30,7 @@ public class Lift {
         isStandingBy = false;
     }
 
-    public boolean liftStatus() {
+    public boolean status() {
         return isStandingBy;
     }
 }

@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static kata.the.lift.Direction.UP;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class LiftTest {
 
@@ -17,7 +17,7 @@ public class LiftTest {
         lift.floorCall(new Floor(3), UP);
 
         // Then
-        assertThat(lift.liftStatus(), is(false));
+        assertThat(lift.status(), is(false));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class LiftTest {
         lift.requestFloor(new Floor(5));
 
         // Then
-        assertThat(lift.liftStatus(), is(false));
+        assertThat(lift.status(), is(false));
 
     }
 }
