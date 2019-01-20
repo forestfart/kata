@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+import static java.lang.String.format;
+
 
 public class Lift {
     private Map<Floor, Direction> calls = new HashMap<>();
@@ -38,6 +40,8 @@ public class Lift {
     public void drive() {
         if(floorRequests.size() != 0 && currentFloor != floorRequests.getFirst()) {
             currentFloor = floorRequests.getFirst();
+            floorRequests.removeFirst();
+            System.out.println(format("Lift arrives on level %d", currentFloor.floorNumber()));
         }
     }
 }

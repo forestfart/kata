@@ -80,4 +80,28 @@ public class LiftTest {
         assertThat(lift.currentFloor(), is(floor(2)));
         assertThat(lift.isStandby(), is(true));
     }
+
+    @Test
+    public void currentFloorMonitorDisplaysCurrentLevel() {
+        // Given
+        Lift lift = new Lift(floor(2));
+
+        // When
+        Floor currentLevelDisplayStep0 = lift.currentFloor();
+        lift.requestFloor(floor(3));
+        lift.drive();
+        Floor currentLevelDisplayStep1 = lift.currentFloor();
+        lift.requestFloor(floor(4));
+        lift.drive();
+        Floor currentLevelDisplayStep2 = lift.currentFloor();
+        lift.requestFloor(floor(0));
+        lift.drive();
+        Floor currentLevelDisplayStep3 = lift.currentFloor();
+
+        // Then
+        assertThat(currentLevelDisplayStep0, is(floor(2)));
+        assertThat(currentLevelDisplayStep1, is(floor(3)));
+        assertThat(currentLevelDisplayStep2, is(floor(4)));
+        assertThat(currentLevelDisplayStep3, is(floor(0)));
+    }
 }
