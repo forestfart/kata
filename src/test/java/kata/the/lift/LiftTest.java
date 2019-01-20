@@ -5,6 +5,7 @@ import org.junit.Test;
 import static kata.the.lift.Direction.UP;
 import static kata.the.lift.Floor.floor;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 public class LiftTest {
@@ -125,5 +126,15 @@ public class LiftTest {
         assertThat(currentLevelDisplayStep0, is(floor(2)));
         assertThat(currentLevelDisplayStep1, is(floor(3)));
         assertThat(currentLevelDisplayStep2, is(floor(4)));
+    }
+
+    @Test
+    public void currentFloorMonitorDisplayNoArrowsIfStandingBy() {
+        // Given & When
+        Lift lift = new Lift(floor(2));
+
+        // Then
+        assertThat(lift.driveDirection(), is(nullValue()));
+
     }
 }

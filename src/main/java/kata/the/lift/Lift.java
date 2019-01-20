@@ -11,6 +11,7 @@ public class Lift {
     private Map<Floor, Direction> callsFromFloors = new HashMap<>();
     private LinkedList<Floor> liftRequests = new LinkedList<>();
     private Floor currentFloor;
+    private Direction nextFloorDirection = null;
 
     public Lift(Floor floor) {
         this.currentFloor = floor;
@@ -46,5 +47,9 @@ public class Lift {
 
     public Floor currentFloor() {
         return currentFloor;
+    }
+
+    public Direction driveDirection() {
+        return nextFloorDirection;
     }
 }
