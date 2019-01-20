@@ -54,4 +54,17 @@ public class LiftTest {
         // Then
         assertThat(lift.isStandby(), is(true));
     }
+
+    @Test
+    public void liftTravelsToTheRequestedLevel() {
+        // Given
+        Lift lift = new Lift(floor(2));
+        lift.requestFloor(floor(5));
+
+        // When
+        lift.drive();
+
+        // Then
+        assertThat(lift.currentFloor(), is(floor(5)));
+    }
 }

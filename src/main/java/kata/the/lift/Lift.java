@@ -7,12 +7,12 @@ import java.util.Map;
 
 public class Lift {
     private Map<Floor, Direction> calls = new HashMap<>();
-    private Floor currentFlor;
+    private Floor currentFloor;
     private boolean isStandby = true;
-    private LinkedList floorRequests = new LinkedList<>();
+    private LinkedList<Floor> floorRequests = new LinkedList<>();
 
     public Lift(Floor floor) {
-        this.currentFlor = floor;
+        this.currentFloor = floor;
     }
 
     public void floorCall(Floor floorLevel, Direction direction) {
@@ -21,11 +21,11 @@ public class Lift {
     }
 
     public Floor currentFloor() {
-        return currentFlor;
+        return currentFloor;
     }
 
     public void requestFloor(Floor requestedFloor) {
-        if (requestedFloor != currentFlor) {
+        if (requestedFloor != currentFloor) {
             floorRequests.add(requestedFloor);
             isStandby = false;
         }
@@ -35,4 +35,7 @@ public class Lift {
         return isStandby;
     }
 
+    public void drive() {
+        this.currentFloor = floorRequests.getFirst();
+    }
 }

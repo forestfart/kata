@@ -17,8 +17,4 @@ public class Floor {
         if (floorMap.get(floorNumber) == null) return new Floor(floorNumber);
         return floorMap.get(floorNumber);
     }
-
-    public Integer getNumber() {
-        return floorNumber;
-    }
 }
