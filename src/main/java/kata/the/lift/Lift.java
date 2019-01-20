@@ -15,6 +15,7 @@ public class Lift {
 
     public Lift(Floor floor) {
         this.currentFloor = floor;
+        monitorDisplay("Newly initialised lift on level %d");
     }
 
     public void floorCall(Floor floorLevel, Direction direction) {
@@ -33,15 +34,19 @@ public class Lift {
         }
     }
 
-    public boolean isStandby() {
-        return isStandby;
-    }
-
     public void drive() {
         if(floorRequests.size() != 0 && currentFloor != floorRequests.getFirst()) {
             currentFloor = floorRequests.getFirst();
             floorRequests.removeFirst();
-            System.out.println(format("Lift arrives on level %d", currentFloor.floorNumber()));
+            monitorDisplay("Lift arrives on level %d");
         }
+    }
+
+    public boolean isStandby() {
+        return isStandby;
+    }
+
+    private void monitorDisplay(String message) {
+        System.out.println(format(message, currentFloor.floorNumber()));
     }
 }
