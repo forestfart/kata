@@ -135,6 +135,18 @@ public class LiftTest {
 
         // Then
         assertThat(lift.driveDirection(), is(nullValue()));
-
     }
+
+    @Test
+    public void currentFloorMonitorDisplayDirectionUPifTravellingToHigherLevel() {
+        // Given
+        Lift lift = new Lift(floor(2));
+
+        // When
+        lift.request(floor(6));
+
+        // Then
+        assertThat(lift.driveDirection(), is(UP));
+    }
+
 }
