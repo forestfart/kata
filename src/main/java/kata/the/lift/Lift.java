@@ -36,6 +36,8 @@ public class Lift {
     }
 
     public void drive() {
-        this.currentFloor = floorRequests.getFirst();
+        if(floorRequests.size() != 0 && currentFloor != floorRequests.getFirst()) {
+            currentFloor = floorRequests.getFirst();
+        }
     }
 }

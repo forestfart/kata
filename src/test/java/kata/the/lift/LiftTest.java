@@ -67,4 +67,17 @@ public class LiftTest {
         // Then
         assertThat(lift.currentFloor(), is(floor(5)));
     }
+
+    @Test
+    public void liftStandsByIfNoPendingRequest() {
+        // Given
+        Lift lift = new Lift(floor(2));
+
+        // When
+        lift.drive();
+
+        // Then
+        assertThat(lift.currentFloor(), is(floor(2)));
+        assertThat(lift.isStandby(), is(true));
+    }
 }
