@@ -30,7 +30,7 @@ public class Lift {
 
     public void floorCall(Floor floorLevel, Direction direction) {
         callsFromFloors.add(new FloorCall(floorLevel, direction));
-        nextFloorDirection = resolveTravelDirectionAfterNewFloorCall();
+        if (liftRequests.size() == 0) nextFloorDirection = resolveTravelDirectionAfterNewFloorCall();
     }
 
     public void request(Floor requestedFloor) {

@@ -187,4 +187,17 @@ public class LiftTest {
         assertThat(lift.driveDirection(), is(DOWN));
     }
 
+    @Test
+    public void liftCallsTakesPriorityOverFloorCalls() {
+        // Given
+        Lift lift = new Lift(floor(2));
+
+        // When
+        lift.request(floor(6));
+        lift.floorCall(floor(-2), UP);
+
+        // Then
+        assertThat(lift.driveDirection(), is(UP));
+    }
+
 }
