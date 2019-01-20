@@ -2,6 +2,7 @@ package kata.the.lift;
 
 import org.junit.Test;
 
+import static kata.the.lift.Direction.DOWN;
 import static kata.the.lift.Direction.UP;
 import static kata.the.lift.Floor.floor;
 import static org.hamcrest.CoreMatchers.is;
@@ -147,6 +148,43 @@ public class LiftTest {
 
         // Then
         assertThat(lift.driveDirection(), is(UP));
+    }
+
+    @Test
+    public void currentFloorMonitorDisplayDirectionDOWNifTravellingToLowerLevel() {
+        // Given
+        Lift lift = new Lift(floor(2));
+
+        // When
+        lift.request(floor(-2));
+
+        // Then
+        assertThat(lift.driveDirection(), is(DOWN));
+    }
+
+    @Test
+    public void currentFloorMonitorDisplayDirectionUPifCalledFromHigherLevel() {
+        // Given
+        Lift lift = new Lift(floor(2));
+
+        // When
+        lift.floorCall(floor(6), DOWN);
+
+        // Then
+        assertThat(lift.driveDirection(), is(UP));
+    }
+
+
+    @Test
+    public void currentFloorMonitorDisplayDirectionDOWNifCalledFromLowerLevel() {
+        // Given
+        Lift lift = new Lift(floor(2));
+
+        // When
+        lift.floorCall(floor(-2), UP);
+
+        // Then
+        assertThat(lift.driveDirection(), is(DOWN));
     }
 
 }

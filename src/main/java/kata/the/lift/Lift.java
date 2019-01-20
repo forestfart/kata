@@ -1,8 +1,6 @@
 package kata.the.lift;
 
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 
 import static java.lang.String.format;
 import static kata.the.lift.Direction.DOWN;
@@ -10,7 +8,7 @@ import static kata.the.lift.Direction.UP;
 
 
 public class Lift {
-    private Map<Floor, Direction> callsFromFloors = new HashMap<>();
+    private LinkedList<FloorCall> callsFromFloors = new LinkedList<>();
     private LinkedList<Floor> liftRequests = new LinkedList<>();
     private Floor currentFloor;
     private Direction nextFloorDirection = null;
@@ -20,19 +18,25 @@ public class Lift {
         monitorDisplay("Newly initialised lift on level %d");
     }
 
-    private Direction resolveTravelDirection() {
+    private Direction resolveTravelDirectionAfterNewRequest() {
         if (liftRequests.getFirst().floorNumber() > currentFloor.floorNumber()) return nextFloorDirection = UP;
         return nextFloorDirection = DOWN;
     }
 
+    private Direction resolveTravelDirectionAfterNewFloorCall() {
+        if (callsFromFloors.getFirst().floorLevel() > currentFloor.floorNumber()) return nextFloorDirection = UP;
+        return nextFloorDirection = DOWN;
+    }
+
     public void floorCall(Floor floorLevel, Direction direction) {
-        callsFromFloors.put(floorLevel, direction);
+        callsFromFloors.add(new FloorCall(floorLevel, direction));
+        nextFloorDirection = resolveTravelDirectionAfterNewFloorCall();
     }
 
     public void request(Floor requestedFloor) {
         if (requestedFloor != currentFloor) {
             liftRequests.add(requestedFloor);
-            nextFloorDirection = resolveTravelDirection();
+            nextFloorDirection = resolveTravelDirectionAfterNewRequest();
         }
     }
 
