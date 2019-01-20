@@ -8,9 +8,8 @@ import static java.lang.String.format;
 
 
 public class Lift {
-    private Map<Floor, Direction> calls = new HashMap<>();
+    private Map<Floor, Direction> callsFromFloors = new HashMap<>();
     private Floor currentFloor;
-    private boolean isStandby = true;
     private LinkedList<Floor> floorRequests = new LinkedList<>();
 
     public Lift(Floor floor) {
@@ -19,8 +18,7 @@ public class Lift {
     }
 
     public void floorCall(Floor floorLevel, Direction direction) {
-        calls.put(floorLevel, direction);
-        isStandby = false;
+        callsFromFloors.put(floorLevel, direction);
     }
 
     public Floor currentFloor() {
@@ -30,7 +28,6 @@ public class Lift {
     public void requestFloor(Floor requestedFloor) {
         if (requestedFloor != currentFloor) {
             floorRequests.add(requestedFloor);
-            isStandby = false;
         }
     }
 
@@ -43,7 +40,8 @@ public class Lift {
     }
 
     public boolean isStandby() {
-        return isStandby;
+        if(floorRequests.size() == 0 && callsFromFloors.size() == 0) return true;
+        return false;
     }
 
     private void monitorDisplay(String message) {
