@@ -37,7 +37,7 @@ public class LiftTest {
         Lift lift = new Lift(floor(2));
 
         // When
-        lift.requestFloor(floor(5));
+        lift.request(floor(5));
 
         // Then
         assertThat(lift.isStandby(), is(false));
@@ -49,7 +49,7 @@ public class LiftTest {
         Lift lift = new Lift(floor(2));
 
         // When
-        lift.requestFloor(floor(2));
+        lift.request(floor(2));
 
         // Then
         assertThat(lift.isStandby(), is(true));
@@ -59,7 +59,7 @@ public class LiftTest {
     public void liftTravelsToTheRequestedLevel() {
         // Given
         Lift lift = new Lift(floor(2));
-        lift.requestFloor(floor(5));
+        lift.request(floor(5));
 
         // When
         lift.drive();
@@ -88,13 +88,13 @@ public class LiftTest {
 
         // When
         Floor currentLevelDisplayStep0 = lift.currentFloor();
-        lift.requestFloor(floor(3));
+        lift.request(floor(3));
         lift.drive();
         Floor currentLevelDisplayStep1 = lift.currentFloor();
-        lift.requestFloor(floor(4));
+        lift.request(floor(4));
         lift.drive();
         Floor currentLevelDisplayStep2 = lift.currentFloor();
-        lift.requestFloor(floor(0));
+        lift.request(floor(0));
         lift.drive();
         Floor currentLevelDisplayStep3 = lift.currentFloor();
 
@@ -112,12 +112,12 @@ public class LiftTest {
 
         // When
         Floor currentLevelDisplayStep0 = lift.currentFloor();
-        lift.requestFloor(floor(3));
+        lift.request(floor(3));
         lift.drive();
-        lift.requestFloor(floor(3));
+        lift.request(floor(3));
         lift.drive();
         Floor currentLevelDisplayStep1 = lift.currentFloor();
-        lift.requestFloor(floor(4));
+        lift.request(floor(4));
         lift.drive();
         Floor currentLevelDisplayStep2 = lift.currentFloor();
 
