@@ -5,7 +5,7 @@ public enum Direction {
 
     protected static Direction revertDirection(Direction direction) {
         if(direction.equals(UP)) return DOWN;
-        return DOWN;
+        return UP;
     }
 
 }
