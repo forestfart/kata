@@ -73,28 +73,24 @@ public class Elevator {
         Optional<Floor> bottomRequest = elevatorRequests.stream().min(Comparator.comparing(Floor::floorNumber));
         Optional<FloorCall> topCall = callsFromFloors.stream().max(Comparator.comparing(FloorCall::floorNumber));
         Optional<FloorCall> bottomCall = callsFromFloors.stream().min(Comparator.comparing(FloorCall::floorNumber));
-        if(topRequest.isPresent()) {
-            if (topRequest.get().floorNumber() > currentFloor.floorNumber()) return true;
-            travelDirection = DOWN;
-            if(!isStandby()) return true;
-        }
-        if(topCall.isPresent()) {
-            if (topCall.get().floorNumber() > currentFloor.floorNumber()) return true;
-            travelDirection = DOWN;
-            if(!isStandby()) return true;
-        }
-        if(bottomRequest.isPresent()) {
-            if (bottomRequest.get().floorNumber() < currentFloor.floorNumber()) return true;
-            travelDirection = UP;
-            if(!isStandby()) return true;
-        }
-        if(bottomCall.isPresent()) {
-            if (bottomCall.get().floorNumber() > currentFloor.floorNumber()) return true;
-            travelDirection = UP;
-            if(!isStandby()) return true;
-        }
+
+        return topRequest.map(floor -> checkIfAnyRequestFromOtherLevels(floor, UP))
+                .orElseGet(() -> topCall.map(floorCall -> checkIfAnyRequestFromOtherLevels(floorCall, UP))
+                        .orElseGet(() -> bottomRequest.map(floor -> checkIfAnyRequestFromOtherLevels(floor, DOWN))
+                                .orElseGet(() -> bottomCall.filter(floorCall -> checkIfAnyRequestFromOtherLevels(floorCall, DOWN)).isPresent())));
+    }
+
+    private boolean checkIfAnyRequestFromOtherLevels(FloorNumber extremeFloor, Direction direction) {
+        if (extremeFloor.floorNumber() > currentFloor.floorNumber()) return true;
+        travelDirection = revertDirection(direction);
+        if(!isStandby()) return true;
         return false;
-     }
+    }
+
+    private Direction revertDirection(Direction direction) {
+        if(direction.equals(UP)) return DOWN;
+        return DOWN;
+    }
 
     public boolean isStandby() {
         if(elevatorRequests.isEmpty() && callsFromFloors.isEmpty()) {

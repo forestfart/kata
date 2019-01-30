@@ -6,7 +6,7 @@ import java.util.Map;
 import static kata.the.lift.Direction.DOWN;
 import static kata.the.lift.Direction.UP;
 
-public class Floor {
+public class Floor implements FloorNumber {
     private static Map<Integer, Floor> floorMap = new HashMap<>();
 
     private boolean isButtonUpActive;

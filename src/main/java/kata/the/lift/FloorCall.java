@@ -1,6 +1,6 @@
 package kata.the.lift;
 
-public class FloorCall {
+public class FloorCall implements FloorNumber {
     private final Floor floorLevel;
     private final Direction direction;
 
