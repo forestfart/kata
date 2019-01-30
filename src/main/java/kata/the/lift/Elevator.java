@@ -7,6 +7,7 @@ import java.util.Optional;
 import static java.lang.String.format;
 import static kata.the.lift.Direction.DOWN;
 import static kata.the.lift.Direction.UP;
+import static kata.the.lift.Direction.revertDirection;
 import static kata.the.lift.Floor.floor;
 
 
@@ -85,11 +86,6 @@ public class Elevator {
         travelDirection = revertDirection(direction);
         if(!isStandby()) return true;
         return false;
-    }
-
-    private Direction revertDirection(Direction direction) {
-        if(direction.equals(UP)) return DOWN;
-        return DOWN;
     }
 
     public boolean isStandby() {
