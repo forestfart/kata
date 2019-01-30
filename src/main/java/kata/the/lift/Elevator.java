@@ -84,8 +84,7 @@ public class Elevator {
     private boolean checkIfAnyRequestFromOtherLevels(FloorNumber extremeFloor, Direction direction) {
         if (extremeFloor.floorNumber() > currentFloor.floorNumber()) return true;
         travelDirection = revertDirection(direction);
-        if(!isStandby()) return true;
-        return false;
+        return !isStandby();
     }
 
     public boolean isStandby() {
