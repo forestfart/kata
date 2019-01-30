@@ -202,7 +202,7 @@ public class ElevatorTest {
     }
 
     @Test
-    public void liftWillStopAtCalledFloorIfItIsOnItsWayUP() {
+    public void lift_will_stop_at_called_floor_if_it_is_n_its_way_up() {
         // Given
         Elevator elevator = new Elevator(floor(-2));
 
@@ -214,6 +214,21 @@ public class ElevatorTest {
         // Then
         assertThat(elevator.currentFloor(), is(floor(6)));
         assertThat(floor(3).isButtonUpActive(), is(false));
+    }
+
+    @Test
+    public void lift_will_stop_at_called_floor_if_it_is_on_its_way_down() {
+        // Given
+        Elevator elevator = new Elevator(floor(23));
+
+        // When
+        elevator.request(floor(6));
+        elevator.floorCall(floor(12), DOWN);
+        elevator.drive();
+
+        // Then
+        assertThat(elevator.currentFloor(), is(floor(6)));
+        assertThat(floor(122).isButtonDownActive(), is(false));
     }
 
 }
