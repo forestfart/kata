@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
 public class ElevatorTest {
 
     @Test
-    public void liftGetsCallFromFloorWithDirection() {
+    public void lift_gets_call_from_floor_with_direction() {
         // Given
         Elevator elevator = new Elevator(floor(2));
 
@@ -25,7 +25,7 @@ public class ElevatorTest {
     }
 
     @Test
-    public void liftCanReturnItsCurrentLocation() {
+    public void lift_can_return_its_current_location() {
         // Given
         Floor currentFloor = floor(2);
         Elevator elevator = new Elevator(currentFloor);
@@ -35,7 +35,7 @@ public class ElevatorTest {
     }
 
     @Test
-    public void liftGetsFloorRequest() {
+    public void lift_gets_floor_request() {
         // Given
         Elevator elevator = new Elevator(floor(2));
 
@@ -47,7 +47,7 @@ public class ElevatorTest {
     }
 
     @Test
-    public void liftDoesNotRespondToTheSameRequests() {
+    public void lift_does_not_respond_to_the_same_requests() {
         // Given
         Elevator elevator = new Elevator(floor(2));
 
@@ -59,7 +59,7 @@ public class ElevatorTest {
     }
 
     @Test
-    public void liftTravelsToTheRequestedLevel() {
+    public void lift_travels_to_the_requested_level() {
         // Given
         Elevator elevator = new Elevator(floor(2));
         elevator.request(floor(5));
@@ -72,7 +72,7 @@ public class ElevatorTest {
     }
 
     @Test
-    public void liftStandsByIfNoPendingRequest() {
+    public void lift_stands_by_if_no_pending_request() {
         // Given
         Elevator elevator = new Elevator(floor(2));
 
@@ -85,7 +85,7 @@ public class ElevatorTest {
     }
 
     @Test
-    public void currentFloorMonitorDisplaysCurrentLevel() {
+    public void current_floor_monitor_displays_current_level() {
         // Given
         Elevator elevator = new Elevator(floor(2));
 
@@ -109,7 +109,7 @@ public class ElevatorTest {
     }
 
     @Test
-    public void doubleRequestsDoesNotAffectLiftMonitor() {
+    public void double_requests_does_not_affect_lift_monitor() {
         // Given
         Elevator elevator = new Elevator(floor(2));
 
@@ -131,7 +131,7 @@ public class ElevatorTest {
     }
 
     @Test
-    public void currentFloorMonitorDisplayNoArrowsIfStandingBy() {
+    public void current_floor_monitor_display_no_arrows_if_standing_by() {
         // Given & When
         Elevator elevator = new Elevator(floor(2));
 
@@ -140,7 +140,7 @@ public class ElevatorTest {
     }
 
     @Test
-    public void currentFloorMonitorDisplayDirectionUPifTravellingToHigherLevel() {
+    public void current_floor_monitor_display_direction_u_pif_travelling_to_higher_level() {
         // Given
         Elevator elevator = new Elevator(floor(2));
 
@@ -152,7 +152,7 @@ public class ElevatorTest {
     }
 
     @Test
-    public void currentFloorMonitorDisplayDirectionDOWNifTravellingToLowerLevel() {
+    public void current_floor_monitor_display_direction_d_o_w_nif_travelling_to_lower_level() {
         // Given
         Elevator elevator = new Elevator(floor(2));
 
@@ -164,7 +164,7 @@ public class ElevatorTest {
     }
 
     @Test
-    public void currentFloorMonitorDisplayDirectionUPifCalledFromHigherLevel() {
+    public void current_floor_monitor_display_direction_u_pif_called_from_higher_level() {
         // Given
         Elevator elevator = new Elevator(floor(2));
 
@@ -175,9 +175,8 @@ public class ElevatorTest {
         assertThat(elevator.driveDirection(), is(UP));
     }
 
-
     @Test
-    public void currentFloorMonitorDisplayDirectionDOWNifCalledFromLowerLevel() {
+    public void current_floor_monitor_display_direction_d_o_w_nif_called_from_lower_level() {
         // Given
         Elevator elevator = new Elevator(floor(2));
 
@@ -189,7 +188,7 @@ public class ElevatorTest {
     }
 
     @Test
-    public void liftCallsTakesPriorityOverFloorCalls() {
+    public void lift_calls_takes_priority_over_floor_calls() {
         // Given
         Elevator elevator = new Elevator(floor(2));
 
