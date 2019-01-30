@@ -10,8 +10,11 @@ public class FloorCall {
         this.direction = direction;
     }
 
-    public Integer floorLevel() {
+    public Integer floorNumber() {
         return floorLevel.floorNumber();
     }
 
+    public Direction direction() {
+        return direction;
+    }
 }
