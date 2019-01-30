@@ -3,12 +3,14 @@ package kata.the.lift;
 import java.util.HashMap;
 import java.util.Map;
 
+import static kata.the.lift.Direction.DOWN;
+import static kata.the.lift.Direction.UP;
+
 public class Floor {
     private static Map<Integer, Floor> floorMap = new HashMap<>();
 
     private boolean isButtonUpActive;
     private boolean isButtonDownActive;
-
     private Integer floorNumber;
 
     private Floor(Integer floorNumber) {
@@ -27,27 +29,23 @@ public class Floor {
         return floorNumber;
     }
 
-    public boolean isButtonUpActive() {
-        return floorMap.get(floorNumber).isButtonUpActive;
+    public boolean isFloorButtonActive(Direction direction) {
+        return floorMap.get(floorNumber).isButtonActive(direction);
     }
 
-    public boolean isButtonDownActive() {
-        return floorMap.get(floorNumber).isButtonDownActive;
+    protected void setButtonActive(Direction direction) {
+        if (direction.equals(UP) && !isButtonUpActive) this.isButtonUpActive = true;
+        if (direction.equals(DOWN) && !isButtonDownActive) this.isButtonDownActive = true;
     }
 
-    protected void setButtonUpActive() {
-        this.isButtonUpActive = true;
+    protected void clearButton(Direction direction) {
+        if (direction.equals(UP) && isButtonUpActive) this.isButtonUpActive = false;
+        if (direction.equals(DOWN) && isButtonDownActive) this.isButtonDownActive = false;
     }
 
-    protected void setButtonDownActive() {
-        this.isButtonDownActive = true;
-    }
-
-    public void clearButtonUp() {
-        this.isButtonUpActive = false;
-    }
-
-    public void clearButtonDown() {
-        this.isButtonDownActive = false;
+    private boolean isButtonActive(Direction direction) {
+        if (direction.equals(UP) && isButtonUpActive) return true;
+        if (direction.equals(DOWN) && isButtonDownActive) return true;
+        return false;
     }
 }
