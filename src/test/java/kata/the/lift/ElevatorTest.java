@@ -213,6 +213,7 @@ public class ElevatorTest {
 
         // Then
         assertThat(elevator.currentFloor(), is(floor(6)));
+        assertThat(floor(3).isButtonUpActive(), is(false));
     }
 
 }

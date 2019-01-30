@@ -32,6 +32,8 @@ public class Elevator {
     }
 
     public void floorCall(Floor floorLevel, Direction direction) {
+        if (direction.equals(UP)) floorLevel.setButtonUpActive();
+        if (direction.equals(DOWN)) floorLevel.setButtonDownActive();
         callsFromFloors.add(new FloorCall(floorLevel, direction));
         if (elevatorRequests.size() == 0) travelDirection = resolveTravelDirectionAfterNewFloorCall();
     }
@@ -48,7 +50,11 @@ public class Elevator {
             if (travelDirection.equals(UP)) currentFloor = floor(currentFloor.floorNumber() + 1);
             if (travelDirection.equals(DOWN)) currentFloor = floor(currentFloor.floorNumber() - 1);
             monitorDisplay("Moving to level: %d");
-            if (needToStopAtThisLevel()) monitorDisplay("Stopping at level: %d");
+            if (needToStopAtThisLevel()) {
+                monitorDisplay("Stopping at level: %d");
+                if (travelDirection.equals(UP) && currentFloor.isButtonUpActive()) currentFloor.clearButtonUp();
+                if (travelDirection.equals(DOWN) && currentFloor.isButtonDownActive()) currentFloor.clearButtonDown();
+            }
             tickOffCurrentFloor();
         }
     }
