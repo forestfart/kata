@@ -230,4 +230,23 @@ public class ElevatorTest {
         assertThat(floor(12).isFloorButtonActive(DOWN), is(false));
     }
 
+    @Test
+    public void asses_if_the_buttons_are_being_highlighted_properly() {
+        // Given
+        Elevator elevator = new Elevator(floor(23));
+        elevator.request(floor(6));
+
+        // When
+        boolean wasButtonDownActiveBeforeFloorCall = floor(12).isFloorButtonActive(DOWN);
+        elevator.floorCall(floor(12), DOWN);
+        boolean wasButtonDownActiveBeforeElevatorPass = floor(12).isFloorButtonActive(DOWN);
+        boolean wasButtonUpActiveBeforeElevatorPass = floor(12).isFloorButtonActive(UP);
+        elevator.drive();
+
+        // Then
+        assertThat(wasButtonDownActiveBeforeFloorCall, is(false));
+        assertThat(wasButtonDownActiveBeforeElevatorPass, is(true));
+        assertThat(wasButtonUpActiveBeforeElevatorPass, is(false));
+        assertThat(floor(12).isFloorButtonActive(DOWN), is(false));
+    }
 }
