@@ -63,7 +63,7 @@ public class Elevator {
         travelDirection = resolveNewCycle();
     }
 
-    public void run() {
+    public void run() throws RuntimeException {
         travelDirection = resolveNewCycle();
         while (isCalledToRun()) {
             moveToNextFloor();
@@ -76,14 +76,14 @@ public class Elevator {
         }
     }
 
-    private boolean requiredToStop() {
+    private boolean requiredToStop() throws RuntimeException {
         if (travelDirection.equals(UP)) {
             return requestsOnTheWayUp.stream().anyMatch(n -> n.floorNumber().equals(currentFloor.floorNumber()));
         }
         if (travelDirection.equals(DOWN)) {
             return requestsOnTheWayDown.stream().anyMatch(n -> n.floorNumber().equals(currentFloor.floorNumber()));
         }
-        return false;
+        throw new RuntimeException("something went terribly wrong!");
     }
 
     private void moveToNextFloor() {
