@@ -104,11 +104,11 @@ public class Elevator {
     private boolean isCalledToRun() {
         if (requestsOnTheWayUp.isEmpty() && requestsOnTheWayDown.isEmpty()) {
             if (!requestsDownQueue.isEmpty()) {
-                resolveInitialTravelDirection(requestsDownQueue.peek());
+                resolveInitialTravelDirection(requestsDownQueue.poll());
                 return true;
             }
             if (!requestsUpQueue.isEmpty()) {
-                resolveInitialTravelDirection(requestsUpQueue.peek());
+                resolveInitialTravelDirection(requestsUpQueue.poll());
                 return true;
             }
             travelDirection = null;

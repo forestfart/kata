@@ -250,4 +250,30 @@ public class ElevatorTest {
         assertThat(floor(12).isFloorButtonActive(DOWN), is(false));
     }
 
+    @Test
+    public void elevator_will_move_up_and_down_then_standby_until_next_move_down_and_up() {
+        // Given
+        Elevator elevator = new Elevator(floor(0));
+
+        // When
+        elevator.floorCall(floor(56), DOWN);
+        elevator.run();
+        elevator.request(floor(0));
+        boolean isStandby1 = elevator.isStandingBy();
+        Floor standbyFloor1 = elevator.currentFloor();
+        elevator.floorCall(floor(-5), UP);
+        elevator.run();
+        elevator.request(floor(26));
+        elevator.run();
+        boolean isStandby2 = elevator.isStandingBy();
+        Floor standbyFloor2 = elevator.currentFloor();
+
+        // Then
+        assertThat(isStandby1, is(false));
+        assertThat(standbyFloor1, is(floor(56)));
+        assertThat(isStandby2, is(true));
+        assertThat(standbyFloor2, is(floor(26)));
+    }
+
+    //add test when callfrom floor where elevator is at the moment
 }
