@@ -1,12 +1,12 @@
-package kata.the.lift;
+package kata.the.elevator;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static kata.the.lift.Direction.DOWN;
-import static kata.the.lift.Direction.UP;
+import static kata.the.elevator.Direction.DOWN;
+import static kata.the.elevator.Direction.UP;
 
-public class Floor implements FloorNumber {
+public class Floor {
     private static Map<Integer, Floor> floorMap = new HashMap<>();
 
     private boolean isButtonUpActive;

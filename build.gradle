@@ -1,4 +1,4 @@
-group 'the.lift.kata'
+group 'the.elevator.kata'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'

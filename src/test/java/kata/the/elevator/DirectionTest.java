@@ -1,9 +1,9 @@
-package kata.the.lift;
+package kata.the.elevator;
 
 import org.junit.Test;
 
-import static kata.the.lift.Direction.*;
-import static kata.the.lift.Direction.UP;
+import static kata.the.elevator.Direction.*;
+import static kata.the.elevator.Direction.UP;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 

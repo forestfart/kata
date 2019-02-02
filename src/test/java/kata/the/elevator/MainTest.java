@@ -1,8 +1,6 @@
-package kata.the.lift;
+package kata.the.elevator;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class MainTest {
 

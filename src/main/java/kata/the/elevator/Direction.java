@@ -1,4 +1,4 @@
-package kata.the.lift;
+package kata.the.elevator;
 
 public enum Direction {
     UP, DOWN;
