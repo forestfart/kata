@@ -275,5 +275,16 @@ public class ElevatorTest {
         assertThat(standbyFloor2, is(floor(26)));
     }
 
-    //add test when callfrom floor where elevator is at the moment
+    @Test
+    public void call_from_the_same_floor_where_elevator_is_at_the_moment() {
+        // Given
+        Elevator elevator = new Elevator(floor(26));
+
+        // When
+        elevator.floorCall(floor(26), DOWN);
+        elevator.run();
+
+        // Then
+        assertThat(elevator.isStandingBy(), is(true));
+    }
 }
