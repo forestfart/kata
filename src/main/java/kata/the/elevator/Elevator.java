@@ -1,6 +1,7 @@
 package kata.the.elevator;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import static java.lang.String.format;
 import static kata.the.elevator.Direction.DOWN;
@@ -9,8 +10,8 @@ import static kata.the.elevator.Floor.floor;
 
 
 public class Elevator {
-    private LinkedList<Floor> requestsOnTheWayUp = new LinkedList<>();
-    private LinkedList<Floor> requestsOnTheWayDown = new LinkedList<>();
+    private List<Floor> requestsOnTheWayUp = new LinkedList<>();
+    private List<Floor> requestsOnTheWayDown = new LinkedList<>();
     private LinkedList<Floor> requestsUpQueue = new LinkedList<>();
     private LinkedList<Floor> requestsDownQueue = new LinkedList<>();
     private Direction travelDirection = null;
@@ -29,6 +30,66 @@ public class Elevator {
         travelDirection = resolveNewCycle();
     }
 
+    public void innerElevatorRequest(Floor requestedFloor) {
+        if (requestedFloor.floorNumber() > currentFloor.floorNumber()) {
+            requestsOnTheWayUp.add(requestedFloor);
+        }
+        if (requestedFloor.floorNumber() < currentFloor.floorNumber()) {
+            requestsOnTheWayDown.add(requestedFloor);
+        }
+        travelDirection = resolveNewCycle();
+    }
+
+    public Floor currentFloor() {
+        return currentFloor;
+    }
+
+    public Direction travelDirection() {
+        return travelDirection;
+    }
+
+    public boolean isStandingBy() {
+        return travelDirection == null;
+    }
+
+    public void run() throws RuntimeException {
+        travelDirection = resolveNewCycle();
+
+        while (isCalledToRun()) {
+            moveToNextFloor();
+            if (requiredToStop()) {
+                monitorDisplay("Stopping at level: %d");
+                currentFloor.clearButton(travelDirection);
+                tickOffCurrentFloor();
+            }
+        }
+    }
+
+    private void moveToNextFloor() {
+        if (travelDirection.equals(UP)) currentFloor = floor(currentFloor.floorNumber() + 1);
+        if (travelDirection.equals(DOWN)) currentFloor = floor(currentFloor.floorNumber() - 1);
+        monitorDisplay("Moving to level: %d");
+    }
+
+    private boolean requiredToStop() throws RuntimeException {
+        if (travelDirection.equals(UP)) {
+            return requestsOnTheWayUp.stream().anyMatch(n -> n.floorNumber().equals(currentFloor.floorNumber()));
+        }
+        if (travelDirection.equals(DOWN)) {
+            return requestsOnTheWayDown.stream().anyMatch(n -> n.floorNumber().equals(currentFloor.floorNumber()));
+        }
+        throw new RuntimeException("something went terribly wrong!");
+    }
+
+    private void tickOffCurrentFloor() {
+        if (travelDirection.equals(UP)) {
+            requestsOnTheWayUp.removeIf(n -> n.floorNumber().equals(currentFloor.floorNumber()));
+        }
+        if (travelDirection.equals(DOWN)) {
+            requestsOnTheWayDown.removeIf(n -> n.floorNumber().equals(currentFloor.floorNumber()));
+        }
+    }
+
     private void pushQueue() {
         for (Floor callUp : requestsUpQueue) {
             if (currentFloor.floorNumber() < callUp.floorNumber()) {
@@ -45,60 +106,11 @@ public class Elevator {
     }
 
     private Direction resolveNewCycle() {
-
         if (isCalledToRun()) {
             if (!requestsOnTheWayUp.isEmpty()) return UP;
             return DOWN;
         }
         return null;
-    }
-
-    public void request(Floor requestedFloor) {
-        if (requestedFloor.floorNumber() > currentFloor.floorNumber()) {
-            requestsOnTheWayUp.add(requestedFloor);
-        }
-        if (requestedFloor.floorNumber() < currentFloor.floorNumber()) {
-            requestsOnTheWayDown.add(requestedFloor);
-        }
-        travelDirection = resolveNewCycle();
-    }
-
-    public void run() throws RuntimeException {
-        travelDirection = resolveNewCycle();
-        while (isCalledToRun()) {
-            moveToNextFloor();
-
-            if (requiredToStop()) {
-                monitorDisplay("Stopping at level: %d");
-                currentFloor.clearButton(travelDirection);
-                markOffCurrentFloor();
-            }
-        }
-    }
-
-    private boolean requiredToStop() throws RuntimeException {
-        if (travelDirection.equals(UP)) {
-            return requestsOnTheWayUp.stream().anyMatch(n -> n.floorNumber().equals(currentFloor.floorNumber()));
-        }
-        if (travelDirection.equals(DOWN)) {
-            return requestsOnTheWayDown.stream().anyMatch(n -> n.floorNumber().equals(currentFloor.floorNumber()));
-        }
-        throw new RuntimeException("something went terribly wrong!");
-    }
-
-    private void moveToNextFloor() {
-        if (travelDirection.equals(UP)) currentFloor = floor(currentFloor.floorNumber() + 1);
-        if (travelDirection.equals(DOWN)) currentFloor = floor(currentFloor.floorNumber() - 1);
-        monitorDisplay("Moving to level: %d");
-    }
-
-    private void markOffCurrentFloor() {
-        if (travelDirection.equals(UP)) {
-            requestsOnTheWayUp.removeIf(n -> n.floorNumber().equals(currentFloor.floorNumber()));
-        }
-        if (travelDirection.equals(DOWN)) {
-            requestsOnTheWayDown.removeIf(n -> n.floorNumber().equals(currentFloor.floorNumber()));
-        }
     }
 
     private boolean isCalledToRun() {
@@ -117,7 +129,6 @@ public class Elevator {
         return true;
     }
 
-
     private void resolveInitialTravelDirection(Floor destinationFloor) {
         if (currentFloor.floorNumber() < destinationFloor.floorNumber()) {
             requestsOnTheWayUp.add(destinationFloor);
@@ -131,17 +142,5 @@ public class Elevator {
 
     private void monitorDisplay(String message) {
         System.out.println(format(message, currentFloor.floorNumber()));
-    }
-
-    public Floor currentFloor() {
-        return currentFloor;
-    }
-
-    public Direction travelDirection() {
-        return travelDirection;
-    }
-
-    public boolean isStandingBy() {
-        return travelDirection == null;
     }
 }

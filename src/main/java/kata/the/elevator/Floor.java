@@ -11,7 +11,7 @@ public class Floor {
 
     private boolean isButtonUpActive;
     private boolean isButtonDownActive;
-    private Integer floorNumber;
+    private final Integer floorNumber;
 
     private Floor(Integer floorNumber) {
         this.floorNumber = floorNumber;
@@ -45,7 +45,6 @@ public class Floor {
 
     private boolean isButtonActive(Direction direction) {
         if (direction.equals(UP) && isButtonUpActive) return true;
-        if (direction.equals(DOWN) && isButtonDownActive) return true;
-        return false;
+        return direction.equals(DOWN) && isButtonDownActive;
     }
 }

@@ -40,7 +40,7 @@ public class ElevatorTest {
         Elevator elevator = new Elevator(floor(2));
 
         // When
-        elevator.request(floor(5));
+        elevator.innerElevatorRequest(floor(5));
 
         // Then
         assertThat(elevator.isStandingBy(), is(false));
@@ -52,7 +52,7 @@ public class ElevatorTest {
         Elevator elevator = new Elevator(floor(2));
 
         // When
-        elevator.request(floor(2));
+        elevator.innerElevatorRequest(floor(2));
 
         // Then
         assertThat(elevator.isStandingBy(), is(true));
@@ -62,7 +62,7 @@ public class ElevatorTest {
     public void elevator_travels_to_the_requested_level() {
         // Given
         Elevator elevator = new Elevator(floor(2));
-        elevator.request(floor(5));
+        elevator.innerElevatorRequest(floor(5));
 
         // When
         elevator.run();
@@ -91,13 +91,13 @@ public class ElevatorTest {
 
         // When
         Floor currentLevelDisplayStep0 = elevator.currentFloor();
-        elevator.request(floor(3));
+        elevator.innerElevatorRequest(floor(3));
         elevator.run();
         Floor currentLevelDisplayStep1 = elevator.currentFloor();
-        elevator.request(floor(4));
+        elevator.innerElevatorRequest(floor(4));
         elevator.run();
         Floor currentLevelDisplayStep2 = elevator.currentFloor();
-        elevator.request(floor(0));
+        elevator.innerElevatorRequest(floor(0));
         elevator.run();
         Floor currentLevelDisplayStep3 = elevator.currentFloor();
 
@@ -115,12 +115,12 @@ public class ElevatorTest {
 
         // When
         Floor currentLevelDisplayStep0 = elevator.currentFloor();
-        elevator.request(floor(3));
+        elevator.innerElevatorRequest(floor(3));
         elevator.run();
-        elevator.request(floor(3));
+        elevator.innerElevatorRequest(floor(3));
         elevator.run();
         Floor currentLevelDisplayStep1 = elevator.currentFloor();
-        elevator.request(floor(4));
+        elevator.innerElevatorRequest(floor(4));
         elevator.run();
         Floor currentLevelDisplayStep2 = elevator.currentFloor();
 
@@ -145,7 +145,7 @@ public class ElevatorTest {
         Elevator elevator = new Elevator(floor(2));
 
         // When
-        elevator.request(floor(6));
+        elevator.innerElevatorRequest(floor(6));
 
         // Then
         assertThat(elevator.travelDirection(), is(UP));
@@ -157,7 +157,7 @@ public class ElevatorTest {
         Elevator elevator = new Elevator(floor(2));
 
         // When
-        elevator.request(floor(-2));
+        elevator.innerElevatorRequest(floor(-2));
 
         // Then
         assertThat(elevator.travelDirection(), is(DOWN));
@@ -193,7 +193,7 @@ public class ElevatorTest {
         Elevator elevator = new Elevator(floor(2));
 
         // When
-        elevator.request(floor(6));
+        elevator.innerElevatorRequest(floor(6));
         elevator.floorCall(floor(-2), UP);
 
         // Then
@@ -206,7 +206,7 @@ public class ElevatorTest {
         Elevator elevator = new Elevator(floor(-2));
 
         // When
-        elevator.request(floor(6));
+        elevator.innerElevatorRequest(floor(6));
         elevator.floorCall(floor(3), UP);
         elevator.run();
 
@@ -221,7 +221,7 @@ public class ElevatorTest {
         Elevator elevator = new Elevator(floor(23));
 
         // When
-        elevator.request(floor(6));
+        elevator.innerElevatorRequest(floor(6));
         elevator.floorCall(floor(12), DOWN);
         elevator.run();
 
@@ -234,7 +234,7 @@ public class ElevatorTest {
     public void asses_if_the_buttons_are_being_highlighted_properly() {
         // Given
         Elevator elevator = new Elevator(floor(23));
-        elevator.request(floor(6));
+        elevator.innerElevatorRequest(floor(6));
 
         // When
         boolean wasButtonDownActiveBeforeFloorCall = floor(12).isFloorButtonActive(DOWN);
@@ -258,12 +258,12 @@ public class ElevatorTest {
         // When
         elevator.floorCall(floor(56), DOWN);
         elevator.run();
-        elevator.request(floor(0));
+        elevator.innerElevatorRequest(floor(0));
         boolean isStandby1 = elevator.isStandingBy();
         Floor standbyFloor1 = elevator.currentFloor();
         elevator.floorCall(floor(-5), UP);
         elevator.run();
-        elevator.request(floor(26));
+        elevator.innerElevatorRequest(floor(26));
         elevator.run();
         boolean isStandby2 = elevator.isStandingBy();
         Floor standbyFloor2 = elevator.currentFloor();
